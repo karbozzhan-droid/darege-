@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дәреженің қасиеттері · 7 сынып</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d3a8a;--paper:#fdfcf7;--grid:#d9e4f5;--red:#e0503d;--hl:#ffe45e;--ok:#1f9d55;--bad:#d33;--txt:#1b2540}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"PT Sans",Arial,sans-serif;color:var(--txt);background-color:var(--paper);
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;line-height:1.55}
+h1,h2,h3{font-family:"PT Serif",Georgia,serif;color:var(--ink);margin:0 0 .5em}
+nav{position:sticky;top:0;z-index:10;background:var(--ink);display:flex;gap:4px;flex-wrap:wrap;padding:8px 14px;justify-content:center}
+nav a{color:#fff;text-decoration:none;padding:6px 14px;border-radius:20px;font-weight:700}
+nav a:hover,nav a:focus-visible{background:var(--hl);color:var(--ink);outline:none}
+section{max-width:960px;margin:0 auto;padding:44px 20px;border-left:3px solid var(--red);margin-left:max(12px,calc((100% - 960px)/2))}
+.sheet{background:var(--paper);border:2px solid var(--ink);border-radius:6px;padding:20px;box-shadow:6px 6px 0 var(--ink)}
+sup{font-size:.7em;font-weight:700}
+.hero{text-align:center;padding-top:50px}
+.hero h1{font-size:clamp(30px,6vw,54px)}
+.big{font-family:"PT Serif",serif;font-size:clamp(38px,9vw,76px);color:var(--ink)}
+.ctrl{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.ctrl label{font-weight:700}
+input[type=range]{accent-color:var(--red);width:170px;vertical-align:middle}
+.chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;min-height:50px;align-items:center;margin:10px 0}
+.chip{background:var(--hl);border:2px solid var(--ink);border-radius:8px;padding:4px 12px;font-weight:700;font-size:20px;animation:pop .35s both}
+.chip.x{background:none;border:none;padding:0 2px}
+.chip.cut{opacity:.35;text-decoration:line-through;background:#eee}
+.chip.b2{background:#bfe3ff}
+@keyframes pop{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1)}}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+button{font:inherit;cursor:pointer}
+.tab{border:2px solid var(--ink);background:#fff;color:var(--ink);padding:6px 12px;border-radius:6px;font-weight:700}
+.tab.on{background:var(--ink);color:#fff}
+.btn{background:var(--red);color:#fff;border:2px solid var(--ink);padding:8px 18px;border-radius:6px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn:focus-visible,.tab:focus-visible,.opt:focus-visible{outline:3px solid var(--hl);outline-offset:2px}
+.formula{font-family:"PT Serif",serif;font-size:clamp(26px,5vw,40px);color:var(--ink);background:var(--hl);display:inline-block;padding:2px 14px;border-radius:4px;margin:6px 0}
+.lines div{padding:5px 0;border-bottom:1px dashed var(--grid);animation:slide .4s both}
+@keyframes slide{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.steps li{margin:6px 0;animation:slide .4s both}
+.lvl{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.q{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px dashed var(--grid)}
+.q .t{flex:1 1 260px;font-size:19px}
+.q input{width:90px;font:inherit;font-size:18px;padding:5px 8px;border:2px solid var(--ink);border-radius:6px;background:#fff}
+.q.ok input{border-color:var(--ok);background:#e6f7ec}
+.q.no input{border-color:var(--bad);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.mark{width:24px;font-weight:700}
+.bar{height:14px;background:#e4ebf7;border:2px solid var(--ink);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .5s}
+#timer i{background:var(--red);transition:width 1s linear}
+.hud{display:flex;justify-content:space-between;font-weight:700;margin:10px 0;flex-wrap:wrap;gap:8px}
+#gq{font-family:"PT Serif",serif;font-size:clamp(26px,6vw,44px);text-align:center;color:var(--ink);margin:18px 0}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{border:2px solid var(--ink);background:#fff;border-radius:8px;padding:14px;font-size:22px;font-weight:700;color:var(--ink)}
+.opt:hover{background:var(--hl)}
+.opt.good{background:var(--ok);color:#fff;animation:pop .3s}
+.opt.wrong{background:var(--bad);color:#fff;animation:shake .3s}
+.float{position:absolute;font-weight:700;font-size:28px;color:var(--ok);animation:up 1s forwards;pointer-events:none}
+@keyframes up{to{transform:translateY(-60px);opacity:0}}
+footer{text-align:center;padding:24px;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+<a href="#top">Басты бет</a><a href="#theory">Теория</a><a href="#examples">Мысалдар</a><a href="#tasks">Есептер</a><a href="#game">Ойын</a>
+</nav>
+
+<section class="hero" id="top">
+<h1>Дәреженің қасиеттері</h1>
+<p>Алгебра · 7 сынып. Төмендегі сырғытпаларды жылжытып көр!</p>
+<div class="sheet">
+<div class="big" id="bigp"></div>
+<div class="ctrl">
+<label>Негізі: <b id="bv">2</b> <input type="range" id="base" min="2" max="9" value="2"></label>
+<label>Дәреже көрсеткіші: <b id="ev">3</b> <input type="range" id="exp" min="0" max="7" value="3"></label>
+</div>
+<div class="chips" id="chips"></div>
+<div id="hnote"></div>
+</div>
+</section>
+
+<section id="theory">
+<h2>Теория</h2>
+<div class="sheet">
+<p><b>Дәреже</b> — бірдей көбейткіштердің көбейтіндісі: a<sup>n</sup> = a·a·…·a (n рет). Мұндағы <b>a</b> — дәреже негізі, <b>n</b> — дәреже көрсеткіші.</p>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div id="tbody"></div>
+<p style="margin-top:12px"><button class="btn" id="newEx">Басқа мысал</button></p>
+</div>
+</section>
+
+<section id="examples">
+<h2>Мысалдар</h2>
+<div class="grid2" id="exgrid"></div>
+</section>
+
+<section id="tasks">
+<h2>Деңгейлік есептер</h2>
+<div class="sheet">
+<p>Жауабын енгізіп, «Тексеру» батырмасын бас. Дәреже көрсеткішін немесе санды жаз.</p>
+<div class="lvl" id="lvl"></div>
+<div class="bar" aria-label="Прогресс"><i id="prog"></i></div>
+<div id="qlist"></div>
+<p><button class="btn" id="checkAll">Тексеру</button> <span id="res" style="font-weight:700;margin-left:10px"></span></p>
+</div>
+</section>
+
+<section id="game">
+<h2>Ойын: «Дәреже шайқасы»</h2>
+<div class="sheet" style="position:relative" id="gbox">
+<p>60 секундта мүмкіндігінше көп есеп шығар. Дұрыс жауап — +10 ұпай, қатарынан жауап берсең бонус бар!</p>
+<div class="bar" id="timer"><i style="width:100%"></i></div>
+<div class="hud"><span>Ұпай: <b id="sc">0</b></span><span>Қатар: <b id="st">0</b></span><span>Рекорд: <b id="best">0</b></span></div>
+<div id="gq">Дайынсың ба?</div>
+<div class="opts" id="gopts"></div>
+<p style="text-align:center"><button class="btn" id="start">Ойынды бастау</button></p>
+</div>
+</section>
+
+<footer>Сәттілік! Дәреже — алгебраның негізі. ✏️</footer>
+
+<script>
+const P=(b,e)=>`${b}<sup>${e}</sup>`;
+const rep=(b,n,s='·')=>Array(n).fill(b).join(s);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const $=id=>document.getElementById(id);
+
+/* HERO */
+function hero(){
+ const b=+$('base').value,e=+$('exp').value;
+ $('bv').textContent=b;$('ev').textContent=e;
+ $('bigp').innerHTML=P(b,e)+' = '+Math.pow(b,e);
+ const c=$('chips');c.innerHTML='';
+ if(e===0){$('hnote').innerHTML='Кез келген санның нөлінші дәрежесі 1-ге тең (a<sup>0</sup> = 1).';c.innerHTML='<span class="chip">1</span>';return;}
+ for(let i=0;i<e;i++){
+  if(i){const x=document.createElement('span');x.className='chip x';x.textContent='×';c.appendChild(x);}
+  const s=document.createElement('span');s.className='chip';s.textContent=b;s.style.animationDelay=(i*0.06)+'s';c.appendChild(s);
+ }
+ $('hnote').innerHTML=e===1?'a<sup>1</sup> = a: бірінші дәреже санның өзіне тең.':`${b} саны ${e} рет көбейтіледі.`;
+}
+$('base').oninput=$('exp').oninput=hero;hero();
+
+/* THEORY */
+const rules=[
+ {f:'a<sup>m</sup>·a<sup>n</sup> = a<sup>m+n</sup>',t:'Негіздері бірдей дәрежелерді көбейткенде, негізі сол күйінде қалады, көрсеткіштері қосылады.',
+  d(){const b=rnd(2,5),m=rnd(2,4),n=rnd(2,3);return[
+   `${P(b,m)}·${P(b,n)}`,
+   `(${rep(b,m)})·(${rep(b,n)}) = ${rep(b,m+n)}`,
+   `= ${P(b,m+'+'+n)} = ${P(b,m+n)} = ${Math.pow(b,m+n)}`];},
+  chips(){const m=3,n=2;return[...Array(m).fill(['',2]).map(()=>'c'),...Array(n).fill('d')];}},
+ {f:'a<sup>m</sup> : a<sup>n</sup> = a<sup>m−n</sup>',t:'Негіздері бірдей дәрежелерді бөлгенде, негізі сол күйінде қалады, көрсеткіштері азайтылады (m > n, a ≠ 0).',
+  d(){const b=rnd(2,5),n=rnd(2,3),m=n+rnd(1,3);return[
+   `${P(b,m)} : ${P(b,n)}`,
+   `(${rep(b,m)}) / (${rep(b,n)}) — ${n} көбейткіш қысқарады`,
+   `= ${P(b,m+'−'+n)} = ${P(b,m-n)} = ${Math.pow(b,m-n)}`];}},
+ {f:'(a<sup>m</sup>)<sup>n</sup> = a<sup>m·n</sup>',t:'Дәрежені дәрежеге шығарғанда, негізі сол күйінде қалады, көрсеткіштері көбейтіледі.',
+  d(){const b=rnd(2,4),m=rnd(2,3),n=rnd(2,3);return[
+   `(${P(b,m)})<sup>${n}</sup>`,
+   `= ${Array(n).fill(P(b,m)).join('·')} = ${P(b,rep(m,n,'+'))}`,
+   `= ${P(b,m+'·'+n)} = ${P(b,m*n)} = ${Math.pow(b,m*n)}`];}},
+ {f:'(a·b)<sup>n</sup> = a<sup>n</sup>·b<sup>n</sup>',t:'Көбейтіндіні дәрежеге шығарғанда, әр көбейткішті сол дәрежеге шығарып көбейтеді.',
+  d(){const a=rnd(2,4),b=rnd(2,5),n=rnd(2,3);return[
+   `(${a}·${b})<sup>${n}</sup> = ${a*b}<sup>${n}</sup> = ${Math.pow(a*b,n)}`,
+   `${P(a,n)}·${P(b,n)} = ${Math.pow(a,n)}·${Math.pow(b,n)} = ${Math.pow(a,n)*Math.pow(b,n)}`,
+   `Екі нәтиже бірдей! ✔`];}},
+ {f:'(a : b)<sup>n</sup> = a<sup>n</sup> : b<sup>n</sup>',t:'Бөліндіні дәрежеге шығарғанда, бөлінгішті де, бөлгішті де сол дәрежеге шығарады (b ≠ 0).',
+  d(){const b=rnd(2,4),k=rnd(2,4),n=rnd(2,3),a=b*k;return[
+   `(${a} : ${b})<sup>${n}</sup> = ${k}<sup>${n}</sup> = ${Math.pow(k,n)}`,
+   `${P(a,n)} : ${P(b,n)} = ${Math.pow(a,n)} : ${Math.pow(b,n)} = ${Math.pow(k,n)}`,
+   `Екі нәтиже бірдей! ✔`];}},
+ {f:'a<sup>0</sup> = 1,  a<sup>1</sup> = a',t:'Нөлден өзге кез келген санның нөлінші дәрежесі 1-ге тең, ал бірінші дәрежесі санның өзіне тең.',
+  d(){const b=rnd(2,5);return[
+   `${P(b,3)} = ${b**3}`,`${P(b,2)} = ${b**2}   (әр қадамда ${b}-ге бөлеміз)`,`${P(b,1)} = ${b}`,`${P(b,0)} = 1`];}}
+];
+let cur=0;
+function showRule(){
+ [...$('tabs').children].forEach((t,i)=>t.classList.toggle('on',i===cur));
+ const r=rules[cur];const lines=r.d();
+ $('tbody').innerHTML=`<div class="formula">${r.f}</div><p>${r.t}</p><div class="lines">${lines.map((l,i)=>`<div style="animation-delay:${i*0.35}s">${l}</div>`).join('')}</div>`;
+}
+rules.forEach((r,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.innerHTML=(i+1)+'-қасиет';b.onclick=()=>{cur=i;showRule()};$('tabs').appendChild(b)});
+$('newEx').onclick=showRule;showRule();
+
+/* EXAMPLES */
+const ex=[
+ {t:`${P(3,5)}·${P(3,2)}`,s:[`Негіздері бірдей (3), сондықтан көрсеткіштерді қосамыз.`,`${P(3,5)}·${P(3,2)} = ${P(3,'5+2')} = ${P(3,7)}`,`Жауабы: ${P(3,7)} = 2187`]},
+ {t:`${P(10,9)} : ${P(10,6)}`,s:[`Бөлгенде көрсеткіштерді азайтамыз.`,`${P(10,'9−6')} = ${P(10,3)}`,`Жауабы: 1000`]},
+ {t:`(${P(2,3)})<sup>4</sup>·${P(2,2)}`,s:[`Алдымен дәрежені дәрежеге шығарамыз: ${P(2,'3·4')} = ${P(2,12)}`,`Енді көбейтеміз: ${P(2,12)}·${P(2,2)} = ${P(2,14)}`,`Жауабы: ${P(2,14)}`]},
+ {t:`${P(2,4)}·${P(5,4)}`,s:[`Көрсеткіштері бірдей, сондықтан негіздерін көбейтеміз.`,`${P(2,4)}·${P(5,4)} = (2·5)<sup>4</sup> = ${P(10,4)}`,`Жауабы: 10000`]}
+];
+ex.forEach((e,i)=>{
+ const d=document.createElement('div');d.className='sheet';
+ d.innerHTML=`<h3>Мысал ${i+1}</h3><div style="font-size:24px;margin-bottom:8px">${e.t} = ?</div><ol class="steps"></ol><button class="btn">Келесі қадам</button>`;
+ let k=0;const ol=d.querySelector('ol'),bt=d.querySelector('button');
+ bt.onclick=()=>{if(k<e.s.length){const li=document.createElement('li');li.innerHTML=e.s[k++];ol.appendChild(li);}if(k>=e.s.length)bt.textContent='Дайын ✔';};
+ $('exgrid').appendChild(d);
+});
+
+/* TASKS */
+const T={
+ 'A · Жеңіл':[
+  [`${P(2,3)}·${P(2,4)} = 2<sup>?</sup>`,7],[`${P(5,8)} : ${P(5,5)} = 5<sup>?</sup>`,3],[`(${P(3,2)})<sup>3</sup> = 3<sup>?</sup>`,6],[`${P(7,0)} + ${P(1,5)} = ?`,2],[`${P(2,5)} = ?`,32]],
+ 'B · Орташа':[
+  [`${P(2,7)}·${P(2,3)} : ${P(2,6)} = 2<sup>?</sup>`,4],[`(${P(2,3)})<sup>2</sup>·2 = 2<sup>?</sup>`,7],[`(2·5)<sup>3</sup> = ?`,1000],[`${P(4,8)} : ${P(4,6)} = ?`,16],[`(x<sup>2</sup>)<sup>5</sup>·x<sup>3</sup> = x<sup>?</sup>`,13]],
+ 'C · Қиын':[
+  [`${P(2,10)}·${P(5,10)} = 10<sup>?</sup>`,10],[`(${P(3,4)}·${P(3,5)}) : (${P(3,2)})<sup>3</sup> = 3<sup>?</sup>`,3],[`${P(2,5)}·${P(4,3)} = 2<sup>?</sup>`,11],[`(−2)<sup>3</sup> = ?`,-8],[`(a<sup>3</sup>)<sup>4</sup>·a<sup>2</sup> : a<sup>5</sup> = a<sup>?</sup>`,9]]
+};
+let level=Object.keys(T)[0];const done={};
+function renderTasks(){
+ $('lvl').innerHTML='';
+ Object.keys(T).forEach(k=>{const b=document.createElement('button');b.className='tab'+(k===level?' on':'');b.textContent=k;b.onclick=()=>{level=k;renderTasks()};$('lvl').appendChild(b)});
+ const L=$('qlist');L.innerHTML='';
+ T[level].forEach((q,i)=>{
+  const d=document.createElement('div');d.className='q';
+  d.innerHTML=`<span class="t">${i+1}) ${q[0]}</span><input type="number" inputmode="numeric" aria-label="Жауап ${i+1}"><span class="mark"></span>`;
+  L.appendChild(d);
+ });
+ $('res').textContent='';$('prog').style.width=(done[level]||0)/T[level].length*100+'%';
+}
+$('checkAll').onclick=()=>{
+ let ok=0;const rows=$('qlist').children;
+ T[level].forEach((q,i)=>{
+  const r=rows[i],v=r.querySelector('input').value.trim();
+  const good=v!==''&&Number(v)===q[1];
+  r.classList.remove('ok','no');if(v!=='')r.classList.add(good?'ok':'no');
+  r.querySelector('.mark').textContent=v===''?'':good?'✔':'✘';
+  if(good)ok++;
+ });
+ done[level]=ok;$('prog').style.width=ok/T[level].length*100+'%';
+ $('res').textContent=`${ok} / ${T[level].length} ${ok===T[level].length?'— керемет! 🎉':'— қателерді түзетіп көр'}`;
+};
+renderTasks();
+
+/* GAME */
+let score=0,streak=0,time=60,tm=null,answer=null,best=+(localStorage.getItem?.call?0:0);
+try{best=+localStorage.getItem('dareje_best')||0}catch(e){}
+$('best').textContent=best;
+function makeQ(){
+ const t=rnd(1,5),b=rnd(2,9);let q,c,kind='exp';
+ if(t===1){const m=rnd(2,9),n=rnd(2,9);q=`${P(b,m)}·${P(b,n)} = ${b}<sup>?</sup>`;c=m+n;}
+ else if(t===2){const n=rnd(2,6),m=n+rnd(1,6);q=`${P(b,m)} : ${P(b,n)} = ${b}<sup>?</sup>`;c=m-n;}
+ else if(t===3){const m=rnd(2,5),n=rnd(2,5);q=`(${P(b,m)})<sup>${n}</sup> = ${b}<sup>?</sup>`;c=m*n;}
+ else if(t===4){const m=rnd(3,7),n=rnd(2,6),k=rnd(1,4);q=`${P(b,m)}·${P(b,n)} : ${P(b,k)} = ${b}<sup>?</sup>`;c=m+n-k;}
+ else{const a=rnd(2,4),n=rnd(2,3);q=`(${a}·${b})<sup>${n}</sup> = ${a}<sup>${n}</sup>·${b}<sup>?</sup>`;c=n;}
+ const set=new Set([c]);
+ while(set.size<4){const v=c+rnd(-4,4);if(v>0)set.add(v);}
+ return{q,c,o:[...set].sort(()=>Math.random()-.5)};
+}
+function nextQ(){
+ const g=makeQ();answer=g.c;$('gq').innerHTML=g.q;
+ $('gopts').innerHTML='';
+ g.o.forEach(v=>{const b=document.createElement('button');b.className='opt';b.textContent=v;b.onclick=()=>pick(b,v);$('gopts').appendChild(b)});
+}
+function pick(btn,v){
+ if(time<=0)return;
+ const ok=v===answer;
+ btn.classList.add(ok?'good':'wrong');
+ [...$('gopts').children].forEach(x=>x.disabled=true);
+ if(ok){streak++;const gain=10+Math.min(streak-1,5)*2;score+=gain;fl('+'+gain,btn);}
+ else{streak=0;score=Math.max(0,score-5);}
+ $('sc').textContent=score;$('st').textContent=streak;
+ setTimeout(nextQ,ok?350:600);
+}
+function fl(txt,el){
+ const f=document.createElement('span');f.className='float';f.textContent=txt;
+ const r=el.getBoundingClientRect(),g=$('gbox').getBoundingClientRect();
+ f.style.left=(r.left-g.left+r.width/2-20)+'px';f.style.top=(r.top-g.top)+'px';
+ $('gbox').appendChild(f);setTimeout(()=>f.remove(),1000);
+}
+function end(){
+ clearInterval(tm);
+ $('gopts').innerHTML='';
+ if(score>best){best=score;$('best').textContent=best;try{localStorage.setItem('dareje_best',best)}catch(e){}}
+ $('gq').innerHTML=`Уақыт бітті! Ұпайың: ${score} ${score>=100?'🏆':score>=50?'👍':'💪'}`;
+ $('start').textContent='Қайта ойнау';$('start').style.display='';
+}
+$('start').onclick=()=>{
+ score=0;streak=0;time=60;$('sc').textContent=0;$('st').textContent=0;
+ $('start').style.display='none';
+ const bar=$('timer').firstElementChild;bar.style.transition='none';bar.style.width='100%';
+ setTimeout(()=>bar.style.transition='width 1s linear',50);
+ nextQ();clearInterval(tm);
+ tm=setInterval(()=>{time--;bar.style.width=(time/60*100)+'%';if(time<=0)end();},1000);
+};
+</script>
+</body>
+</html>
